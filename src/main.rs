@@ -36,6 +36,7 @@ impl Board {
             }
             println!();
         }
+        println!();
     }
 
     pub fn set_cell_value(&mut self, row: usize, col: usize, new_value: i32) {
@@ -50,15 +51,28 @@ impl Board {
 
     pub fn print_notes(&self) {
         let board_size = self.cells.len();
+        let sqrt = (board_size as f64).sqrt() as usize;
+
+        // for row in 0..board_size {
+        //     for col in 0..board_size {
+        //         for note_row in &self.cells[col][row].note.matrix {
+        //             for &value in note_row {
+        //                 print!("{:2}", value);
+        //             }
+        //             println!();
+        //         }
+        //     }
+        // }
 
         for row in 0..board_size {
-            for col in 0..board_size {
-                for note_row in &self.cells[col][row].note.matrix {
-                    for &value in note_row {
-                        print!("{:2}", value);
+            for i in 0..sqrt {
+                for col in 0..board_size {
+                    for j in 0..sqrt {
+                        let note = &self.cells[row][col].note;
+                        print!("{:2}", note.matrix[i][j]);
                     }
-                    println!();
                 }
+                println!();
             }
         }
     }
